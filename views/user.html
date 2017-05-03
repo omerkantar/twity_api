@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>twity</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <script src="https://cdn.auth0.com/js/lock/10.14/lock.min.js"></script>
+    <script src="http://cdn.auth0.com/js/auth0/8.5/auth0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'></script>
+    <script src="https://cdn.auth0.com/js/lock/10.14/lock.min.js"></script>
+    <script src="http://cdn.auth0.com/js/auth0/8.5/auth0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+
+</head>
+<body>
+
+
+<style type="text/css">
+    .button-clear {
+        text-align: right !important;
+        padding-left: 0px !important;
+        font-size: 1.2em !important;
+        letter-spacing: 1.3px !important;
+        text-transform: none;
+    }
+</style>
+
+
+
+<div class="container">
+        <div class="row">
+        <div class="column column-20"></div>
+        <div class="column column-60">
+
+            <br>
+            <br>
+            <h1>Twitter Analizi</h1>
+            <br><br>
+
+            <div id="user-temp">
+                <div class="row">
+                    <div class="column column-10">
+                        <img  v-bind:src="user.profile_image_url_https" style="border-radius: 50%; border: solid #ddd 1px">
+                    </div>
+                    <div class="float-right">
+                        <h2 style="margin: 0px;padding: 0px;">{{ user.name }}</h2>
+                        <h4 id="screen-name" >{{user.screen_name}}</h4>
+                    </div>
+                </div>
+                <blockquote>
+                    <p><em>{{user.description}}</em></p>
+                </blockquote>
+                <br>
+                <br>
+
+                <div>
+                    <a class="button button-clear" href="#tweets">Tweetler</a>
+                    <a class="button button-clear" href="#favourites">Favoriler</a>
+                    <a class="button button-clear"  href="#recommendations">Öneriler</a>
+                </div>
+
+            </div>
+
+
+
+            <div id="main-container">
+                <div id="tweets-temp">
+                    <h3>Hashtags</h3>
+                    <canvas id="hashtagChart1" style="display: none" width="400" height="400"></canvas>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Hashtag</th>
+                            <th>Sayısı</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="hashtag in hashtags">
+                            <td>{{hashtag.hashtag}}</td>
+                            <td>{{hashtag.count}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h3>Mentions</h3>
+                    <canvas id="mentionsChart1" style="display: none" width="400" height="400"></canvas>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Count</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="mention in mentions">
+                            <td>{{mention.mention.name}}</td>
+                            <td>{{mention.mention.screen_name}}</td>
+                            <td>{{mention.count}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+
+                <div id="favourites-temp">
+                    <h3>Hashtags</h3>
+                    <canvas id="hashtagChart23" style="display: none" width="400" height="400"></canvas>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Hashtag</th>
+                            <th>Sayısı</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in hashtags">
+                            <td>{{item.hashtag}}</td>
+                            <td>{{item.count}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h3>Mentions</h3>
+                    <canvas id="mentionsChart23" style="display: none" width="400" height="400"></canvas>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Count</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in mentions">
+                            <td>{{item.mention.name}}</td>
+                            <td>{{item.mention.screen_name}}</td>
+                            <td>{{item.count}}</td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h3>Users</h3>
+                    <canvas id="usersChart2" style="display: none" width="400" height="400"></canvas>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Count</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in users">
+                            <td>{{item.user.name}}</td>
+                            <td>{{item.user.screen_name}}</td>
+                            <td>{{item.count}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="recommendations-temp">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="../static/js/index.js"></script>
+<script src="../static/js/request.js"></script>
+<script src="../static/js/charts.js"></script>
+<script src="../static/js/user.js"></script>
+
+</body>
+</html>

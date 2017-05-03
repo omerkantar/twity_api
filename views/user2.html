@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>twity</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <script src="https://cdn.auth0.com/js/lock/10.14/lock.min.js"></script>
+    <script src="http://cdn.auth0.com/js/auth0/8.5/auth0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'></script>
+    <script src="https://cdn.auth0.com/js/lock/10.14/lock.min.js"></script>
+    <script src="http://cdn.auth0.com/js/auth0/8.5/auth0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+</head>
+<body ng-app="myApp">
+
+
+<div class="container">
+    <div class="row">
+        <div class="column column-20"></div>
+        <div class="column column-60">
+            <div>
+                <br><br>
+                    <h1>Twitter Analizi</h1>
+                <br><br>
+                <div ng-controller="profileCtrl">
+                    <div class="row">
+                        <div class="column column-10">
+                            <img  src="{{user.profile_image_url_https}}" style="border-radius: 50%; border: solid #ddd 1px">
+                        </div>
+                        <div class="float-right">
+                            <h2 style="margin: 0px;padding: 0px;">{{ user.name }}</h2>
+                            <h4 id="screen-name" >{{user.screen_name}}</h4>
+                        </div>
+                    </div>
+                    <blockquote>
+                        <p><em>{{user.description}}</em></p>
+                    </blockquote>
+                    <br>
+                    <br>
+                </div>
+
+                <div>
+                    <a class="button button-clear" href="#tweets">Tweetler</a>
+                    <a class="button button-clear" href="#favourites">Favoriler</a>
+                    <a class="button button-clear"  href="#recommendations">Öneriler</a>
+                </div>
+
+                <div id="main-container">
+                    <div ng-view></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var app = angular.module("myApp", ["ngRoute"]);
+    app.config(function($routeProvider) {
+        $routeProvider
+                .when("/", {
+                    templateUrl : "tweets.htm"
+                })
+                .when("/favourites", {
+                    templateUrl : "favourites.htm"
+                })
+                .when("/tweets", {
+                    templateUrl : "tweets.htm"
+                })
+                .when("/recommendations", {
+                    templateUrl : "recommendations.htm"
+                });
+    });
+</script>
+
+
+</body>
+</html>

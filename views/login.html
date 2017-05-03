@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>twity</title>
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <script src="https://cdn.auth0.com/js/lock/10.14/lock.min.js"></script>
+    <script src="http://cdn.auth0.com/js/auth0/8.5/auth0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'></script>
+    <script src="https://cdn.auth0.com/js/lock/10.14/lock.min.js"></script>
+    <script src="http://cdn.auth0.com/js/auth0/8.5/auth0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js"></script></head>
+<body>
+<script src="../static/js/index.js"></script>
+
+<script>
+    var lock = new Auth0Lock('kAvxHwFKWTSMceNlaxhi24nKygxlY7z2', 'omearthling.auth0.com');
+
+    var lock = new Auth0Lock('kAvxHwFKWTSMceNlaxhi24nKygxlY7z2', 'omearthling.auth0.com',{ auth: {
+        redirectUrl: 'http://localhost:5454/callback'
+        , responseType: 'code'
+        , params: {
+            scope: 'openid name email picture'
+        }
+    }});
+
+    lock.show();
+</script>
+</body>
+</html>

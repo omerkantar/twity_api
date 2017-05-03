@@ -1,0 +1,32 @@
+{
+  "name": "twity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "auth0": "^2.6.0",
+    "body-parser": "^1.17.1",
+    "chart.js": "^2.5.0",
+    "clusterfck": "^0.6.0",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "mongoose": "^4.9.7",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "passport-auth0": "^0.6.0",
+    "path": "^0.12.7",
+    "readline": "^1.3.0",
+    "socketio": "^1.0.0",
+    "twit": "^2.2.5"
+  }
+}
