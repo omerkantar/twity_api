@@ -31,7 +31,6 @@ var port = 5454;
 // Add headers
 app.use(function (req, res, next) {
 
-    console.log("req", req);
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
 

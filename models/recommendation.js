@@ -9,8 +9,9 @@ var Schema = mongoose.Schema;
 
 var RecommendationsSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    title: { type: String, required: false },
+    populars: [],
     users: [],
-    tweets: [],
     words: [{ type: String, required: false }],
     create_at: { type: Date, default: Date.now }
 });

@@ -12,8 +12,10 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     screen_name: { type: String,  index: { unique: true }},
     description: { type: String, required: false },
-    tweets: [],
-    favorities: [],
+    analysis: {
+        tweets: [],
+        favorities: []
+    },
     recommendations: [{ type: Schema.Types.ObjectId, ref: 'Recommendation', required: false  }],
     create_at: { type: Date, default: Date.now }
 });

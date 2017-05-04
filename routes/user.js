@@ -36,5 +36,12 @@ router.get('/favorites', function(req, res) {
     UserCtrl.favoritiesAnalysis(req, res);
 });
 
+router.get('/popular', function (req, res) {
+    UserCtrl.popularTweets(req, res);
+});
+
+router.get('/recommendations', function (req, res) {
+    UserCtrl.recommendations(req, res);
+});
 
 module.exports = router;

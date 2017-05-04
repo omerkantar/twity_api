@@ -154,6 +154,30 @@ function findUsers(tweets) {
 
 }
 
+function popularTweets(tweets) {
+
+    var list = new Array();
+
+    for(var i = 0; i < tweets.length; i++) {
+        var tweet = tweets[i];
+        if (tweet.favorite_count > 0) {
+            var obj = {
+                "tweet": tweet,
+                count: tweet.favorite_count
+            };
+            list.push(obj);
+        }
+    };
+
+    if (list.length > 1) {
+        list.sort(function (a, b) {
+            return b.count - a.count;
+        });
+    }
+
+    return list;
+}
+
 
 
 
@@ -175,5 +199,10 @@ module.exports = {
     ANALYSIS_TYPE : {
         TWEETS: "TWEETS",
         FAVORITIES: "FAVORITIES"
+    },
+
+    popularTweets: function (tweets, callback) {
+        var list = popularTweets(tweets);
+        callback(list);
     }
 };
